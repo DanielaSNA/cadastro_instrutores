@@ -1,3 +1,37 @@
+<?php
+
+if (isset($_POST['submit'])) {
+
+    include_once('config.php');
+
+    $nome = $_POST["nome"];
+    $sobrenome = $_POST["sobrenome"];
+    $email = $_POST["email"];
+    $celular = $_POST["celular"];
+    $senha = $_POST["senha"];
+    $confirmesenha = $_POST["confirmesenha"];
+    $genero = $_POST["genero"];
+
+    /* Verificar se a conexão foi bem-sucedida (caso a configuração não inclua essa verificação)
+    if (!$conexao) {
+        die("Falha na conexão: " . mysqli_connect_error());
+    }
+        */
+
+    // Inserir os dados na base de dados
+    $result = mysqli_query($conexao, "INSERT INTO usuario (nome, sobrenome, email, celular, senha, genero, confirmesenha) 
+                                      VALUES ('$nome', '$sobrenome', '$email', '$celular', '$senha', '$genero', '$confirmesenha')");
+
+    /* Verificar se a inserção foi bem-sucedida
+    if ($result) {
+        echo "Registro inserido com sucesso!";
+    } else {
+        echo "Erro ao inserir registro: " . mysqli_error($conexao);
+    }
+        */
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -7,6 +41,7 @@
     <title>Cadastro de Instrutores</title>
 </head>
 <style>
+   <style>
     body {
         width: 100%;
         height: 100vh;
@@ -160,15 +195,17 @@
         }
     }
 </style>
+</style>
 <body>
     <div class="container">
         <div class="form-image">
             <img src="assets/img/undraw_stability_ball_b-4-ia.svg" alt="Imagem">
         </div>
         <div class="form">
-            <form action="#">
+        
+            <form action="index.php" method="POST">
                 <div class="form-header">
-                    <h1>Cadastro de Instrutores| Sintonia Pilates</h1>
+                    <h1>Cadastro de Instrutores | Sintonia Pilates</h1>
                     <div class="login-button">
                         <button type="button"><a href="#" style="color: white; text-decoration: none;">Entrar</a></button>
                     </div>
@@ -177,12 +214,12 @@
                 <div class="input-group">
                     <div class="input-box">
                         <label for="firstname">Primeiro Nome:</label>
-                        <input id="firstname" type="text" name="firstname" placeholder="Digite seu primeiro nome" required>
+                        <input id="nome" type="text" name="nome" placeholder="Digite seu primeiro nome" required>
                     </div>
 
                     <div class="input-box">
                         <label for="lastname">Sobrenome:</label>
-                        <input id="lastname" type="text" name="lastname" placeholder="Digite seu sobrenome" required>
+                        <input id="sobrenome" type="text" name="sobrenome" placeholder="Digite seu sobrenome" required>
                     </div>
 
                     <div class="input-box">
@@ -192,17 +229,17 @@
 
                     <div class="input-box">
                         <label for="number">Celular:</label>
-                        <input id="number" type="tel" name="number" placeholder="(xx) xxxx-xxxx" required>
+                        <input id="celular" type="tel" name="celular" placeholder="(xx) xxxx-xxxx" required>
                     </div>
 
                     <div class="input-box">
                         <label for="password">Senha:</label>
-                        <input id="password" type="password" name="password" placeholder="Digite sua senha" required>
+                        <input id="senha" type="password" name="senha" placeholder="Digite sua senha" required>
                     </div>
 
                     <div class="input-box">
                         <label for="confirmPassword">Confirme sua Senha:</label>
-                        <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Digite sua senha novamente" required>
+                        <input id="confirmesenha" type="password" name="confirmesenha" placeholder="Digite sua senha novamente" required>
                     </div>
                 </div>
 
@@ -213,29 +250,29 @@
 
                     <div class="gender-group">
                         <div class="gender-input">
-                            <input id="female" type="radio" name="gender">
+                            <input id="female" type="radio" name="genero" value="Feminino">
                             <label for="female">Feminino</label>
                         </div>
 
                         <div class="gender-input">
-                            <input id="male" type="radio" name="gender">
+                            <input id="male" type="radio" name="genero" value="Masculino">
                             <label for="male">Masculino</label>
                         </div>
 
                         <div class="gender-input">
-                            <input id="others" type="radio" name="gender">
+                            <input id="others" type="radio" name="genero" value="Outros">
                             <label for="others">Outros</label>
                         </div>
 
                         <div class="gender-input">
-                            <input id="none" type="radio" name="gender">
+                            <input id="none" type="radio" name="genero" value="Prefiro não dizer">
                             <label for="none">Prefiro não dizer</label>
                         </div>
                     </div>
                 </div>
 
                 <div class="continue-button">
-                    <button type="submit">Continuar</button>
+                    <button type="submit" name="submit">Continuar</button>
                 </div>
             </form>
         </div>

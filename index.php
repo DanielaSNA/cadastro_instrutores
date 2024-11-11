@@ -12,23 +12,11 @@ if (isset($_POST['submit'])) {
     $confirmesenha = $_POST["confirmesenha"];
     $genero = $_POST["genero"];
 
-    /* Verificar se a conexão foi bem-sucedida (caso a configuração não inclua essa verificação)
-    if (!$conexao) {
-        die("Falha na conexão: " . mysqli_connect_error());
-    }
-        */
-
-    // Inserir os dados na base de dados
     $result = mysqli_query($conexao, "INSERT INTO usuario (nome, sobrenome, email, celular, senha, genero, confirmesenha) 
                                       VALUES ('$nome', '$sobrenome', '$email', '$celular', '$senha', '$genero', '$confirmesenha')");
 
-    /* Verificar se a inserção foi bem-sucedida
-    if ($result) {
-        echo "Registro inserido com sucesso!";
-    } else {
-        echo "Erro ao inserir registro: " . mysqli_error($conexao);
-    }
-        */
+    $sql = "SELECT  nome, sobrenome, email, celular, senha, genero, confirmesenha FROM usuario";
+    $result = $conexao->query($sql);
 }
 ?>
 
@@ -41,7 +29,6 @@ if (isset($_POST['submit'])) {
     <title>Cadastro de Instrutores</title>
 </head>
 <style>
-   <style>
     body {
         width: 100%;
         height: 100vh;
@@ -197,6 +184,7 @@ if (isset($_POST['submit'])) {
 </style>
 </style>
 <body>
+    <a href="home.php">Voltar</a>
     <div class="container">
         <div class="form-image">
             <img src="assets/img/undraw_stability_ball_b-4-ia.svg" alt="Imagem">
@@ -207,7 +195,7 @@ if (isset($_POST['submit'])) {
                 <div class="form-header">
                     <h1>Cadastro de Instrutores | Sintonia Pilates</h1>
                     <div class="login-button">
-                        <button type="button"><a href="#" style="color: white; text-decoration: none;">Entrar</a></button>
+                        <button type="button"><a href="http://localhost/trabalho_de_conclusao/tela-de-login.html" target ="_blank"color: white; text-decoration: none;">Entrar</a></button>
                     </div>
                 </div>
 
@@ -272,7 +260,7 @@ if (isset($_POST['submit'])) {
                 </div>
 
                 <div class="continue-button">
-                    <button type="submit" name="submit">Continuar</button>
+                    <button type="submit" "http://localhost/trabalho_de_conclusao/tela-de-login.html" target ="_blank" name="submit">Continuar</button>
                 </div>
             </form>
         </div>

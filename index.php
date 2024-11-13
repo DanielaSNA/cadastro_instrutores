@@ -17,6 +17,8 @@ if (isset($_POST['submit'])) {
 
     $sql = "SELECT  nome, sobrenome, email, celular, senha, genero, confirmesenha FROM usuario";
     $result = $conexao->query($sql);
+
+    header('Location:tela-de-login.php');
 }
 ?>
 
@@ -195,7 +197,7 @@ if (isset($_POST['submit'])) {
                 <div class="form-header">
                     <h1>Cadastro de Instrutores | Sintonia Pilates</h1>
                     <div class="login-button">
-                        <button type="button"><a href="http://localhost/trabalho_de_conclusao/tela-de-login.html" target ="_blank"color: white; text-decoration: none;">Entrar</a></button>
+                        <button type="button"><a href="http://localhost/cadastro_instrutores/tela-de-login.php" target ="_blank"color: white; text-decoration: none;">Entrar</a></button>
                     </div>
                 </div>
 
@@ -260,7 +262,7 @@ if (isset($_POST['submit'])) {
                 </div>
 
                 <div class="continue-button">
-                    <button type="submit" "http://localhost/trabalho_de_conclusao/tela-de-login.html" target ="_blank" name="submit">Continuar</button>
+                    <button type="submit" "http://localhost/cadastro_instrutores/tela-de-login.php" target ="_blank" name="submit">Continuar</button>
                 </div>
             </form>
         </div>

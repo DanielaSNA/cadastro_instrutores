@@ -62,7 +62,7 @@
         </div>
     </div>
     <div class="box">
-        <a href="http://localhost/trabalho_de_conclusao/tela-de-login.php">Login</a>
+        <a href="http://localhost/cadastro_instrutores/tela-de-login.php">Login</a>
         <a href="http://localhost/cadastro_instrutores/index.php">Cadastre-se</a>
     </div>
         

@@ -1,37 +1,30 @@
 <?php
+   session_start(); // Iniciar a sessão
 
-   // print_r($_REQUEST);
-   if(isset($_POST['submit'])&&!empty($_POST['senha']))
-   {
-        include_once('config.php');
-        $email = $_POST['email'];
-        $senha = $_POST['senha'];
+   if (isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['senha'])) {
+       include_once('config.php');
+       $email = $_POST['email'];
+       $senha = $_POST['senha'];
 
-       // print_r('Email: ' . $email);
+       // Consulta SQL para verificar as credenciais
+       $sql = "SELECT * FROM usuario WHERE email = '$email' AND senha = '$senha'";
+       $result = $conexao->query($sql);
 
-       // print_r('Senha: '. $senha);
-
-       $sql = "SELECT * FROM usuario WHERE email ='$email' and senha = '$senha'";
-
-       $result =$conexao->query($sql);
-
-       //print_r($result);
-       if(mysqli_num_rows($result)<1)
-       {
-        unset($_SESSION['email']);
-        unset($_SESSION['senha']);
-        header('Location:tela-de-login.php');
+       if ($result->num_rows < 1) {
+           // Login falhou: Redireciona de volta para a tela de login
+           unset($_SESSION['email']);
+           unset($_SESSION['senha']);
+           header('Location: tela-de-login.php');
+       } else {
+           // Login bem-sucedido: Define as variáveis de sessão e redireciona para o sistema
+           $_SESSION['email'] = $email;
+           $_SESSION['senha'] = $senha;
+           header('Location: sistema.php');
+           exit(); // Boa prática encerrar o script após o redirecionamento
        }
-        else
-        {
-            $_SESSION['email'];
-            $_SESSION['senha'];
-            header('Location:sistema.php');
-        }
+   } else {
+       // Redireciona para tela de login se os campos não estiverem preenchidos
+       header('Location: tela-de-login.php');
+       exit();
    }
-   else
-   {
-        header('Location:tela-de-login.php');
-   }
-
 ?>
